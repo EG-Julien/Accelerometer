@@ -1,0 +1,27 @@
+<ion-view title="Live View" id="page3" ng-controller="liveViewCtrl">
+    <ion-content padding="true" class="has-header">
+        <div id="liveView-markdown1" style="color:#000000;">
+            <p>Here you can watch accelerometers parameters in live. You also can record them.</p>
+        </div>
+        <ion-toggle ng-checked="true" ng-model="showLive.checked" ng-change="setLiveResult()">Show live results</ion-toggle>
+        <button on-tap="Record()" id="liveView-button1" class="button button-assertive  button-block"> {{ record.status }} </button>
+        <ion-list id="liveView-list3">
+            <ion-item class="item-icon-left" id="liveView-list-item6">
+                <i class="icon ion-chevron-down"></i>{{ results.x }} <span class="units"></span>
+                <span class="item-note">X axis</span>
+            </ion-item>
+            <ion-item class="item-icon-left" id="liveView-list-item7">
+                <i class="icon ion-chevron-right"></i>{{ results.y }} <span class="units"></span>
+                <span class="item-note">Y axis</span>
+            </ion-item>
+            <ion-item class="item-icon-left" id="liveView-list-item8">
+                <i class="icon ion-chevron-up"></i>{{ results.z }} <span class="units"></span>
+                <span class="item-note">Z axis</span>
+            </ion-item>
+            <ion-item>
+                <ion-toggle ng-checked="true" ng-model="units.checked" ng-change="changeUnits()">m.s<sup>-2</sup> // g</ion-toggle>
+            </ion-item>
+        </ion-list>
+        <button on-tap="Freeze()" id="freeze" class="button button-positive  button-block"> {{ freeze.status }} </button>
+    </ion-content>
+</ion-view>
