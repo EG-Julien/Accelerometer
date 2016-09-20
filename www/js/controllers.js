@@ -20,9 +20,9 @@ angular.module('app.controllers', ['ionic'])
             document.addEventListener("deviceready", function () {
               $cordovaFile.checkFile(cordova.file.dataDirectory, "record.txt")
               .then(function (success) {
-                $cordovaFile.writeExistingFile(cordova.file.dataDirectory, "record.txt", tmp + "/");
+                $cordovaFile.writeExistingFile(cordova.file.dataDirectory, "record.txt",  ",[" + tmp + " {\"name\": " + new Date().getTime()  + " }]");
               }, function (error) {
-                 $cordovaFile.writeFile(cordova.file.dataDirectory, "record.txt", tmp + "/");
+                 $cordovaFile.writeFile(cordova.file.dataDirectory, "record.txt", "[" + tmp + " {\"name\": " + new Date().getTime()  + " }]");
               });
             });
         }
@@ -95,9 +95,9 @@ angular.module('app.controllers', ['ionic'])
                 }
             }
             if ($scope.record.state == true) {
-                      if (check != "{" + $scope.results.time + "," + $scope.results.x + "," + $scope.results.y + "," + $scope.results.z + "}") {
-                        tmp = tmp + "{" + $scope.results.time + "," + $scope.results.x + "," + $scope.results.y + "," + $scope.results.z + "}";
-                        check = "{" + $scope.results.time + "," + $scope.results.x + "," + $scope.results.y + "," + $scope.results.z + "}";
+                      if (check != "{  \"time\": " + $scope.results.time + ", \"x\": " + $scope.results.x + ",  \"y\": " + $scope.results.y + ",  \"z\": " + $scope.results.z + "}") {
+                        tmp = tmp + "{  \"time\": " + $scope.results.time + ", \"x\": " + $scope.results.x + ",  \"y\": " + $scope.results.y + ",  \"z\": " + $scope.results.z + "},";
+                        check = "{  \"time\": " + $scope.results.time + ", \"x\": " + $scope.results.x + ",  \"y\": " + $scope.results.y + ",  \"z\": " + $scope.results.z + "}";
                       }
             }
         });
@@ -111,52 +111,13 @@ angular.module('app.controllers', ['ionic'])
 
   var records;
 
-  $scope.Read = function() {
    document.addEventListener("deviceready", function () {
       $cordovaFile.readAsBinaryString(cordova.file.dataDirectory, "record.txt")
         .then(function (success) {
-          records = success.split('/');
-          alert(records[2]);
+          alert(JSON.parse(success));
+          $scope.data = {records: records};
         }, function (error) {
           alert("Impossible de récupérer les données");
         });
       });
-  }
-
-    var rows = [1,  37.8, 80.8, 41.8];
-    rows = rows.concat([2,  30.9, 69.5, 32.4]);
-    rows = rows.concat([3,  25.4,   57, 25.7]);
-    rows = rows.concat([[4,  11.7, 18.8, 10.5]]);
-    rows = rows.concat([2,  30.9, 69.5, 32.4]);
-    rows = rows.concat([2,  30.9, 69.5, 32.4]);
-
-      google.charts.load('current', {'packages':['line']});
-      google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Time');
-      data.addColumn('number', 'x');
-      data.addColumn('number', 'y');
-      data.addColumn('number', 'z');
-
-      data.addRows(
-        [rows]
-      );
-
-      var options = {
-        width: 310,
-        height: 450,
-        axes: {
-          x: {
-            0: {side: 'top'}
-          }
-        }
-      };
-
-      var chart = new google.charts.Line(document.getElementById('line_top_x'));
-
-      chart.draw(data, options);
-    }
 });

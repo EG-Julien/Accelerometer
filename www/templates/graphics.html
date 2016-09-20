@@ -1,5 +1,10 @@
 <ion-view title="Graphics" id="page4">
     <ion-content padding="true" class="has-header">
+        <ion-list>
+            <ion-item ng-repeat="record in records">
+                Enregistrement : {{ record }}
+            </ion-item>
+        </ion-list>
         <div id="line_top_x"></div>
     </ion-content>
 </ion-view>
