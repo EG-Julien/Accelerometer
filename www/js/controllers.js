@@ -60,7 +60,6 @@ angular.module('app.controllers', ['ionic'])
     $scope.freeze = { status: "Freeze", state: false };
 
     document.addEventListener("deviceready", function () {
-
         $cordovaDeviceMotion.getCurrentAcceleration().then(function(result) {
             if ($scope.units.units == 'g') {
                 $scope.results = {x: (result.x/9.81).toFixed(4), y: (result.y/9.81).toFixed(4), z: (result.z/9.81).toFixed(4), time: result.timestamp};
@@ -76,24 +75,6 @@ angular.module('app.controllers', ['ionic'])
   var options = { frequency: 10 };
 
   document.addEventListener("deviceready", function () {
-
-        /*$cordovaFile.checkDir(cordova.file.dataDirectory, "dir/other_dir")
-        .then(function (success) {
-
-        }, function (error) {
-
-        });*/
-
-
-        /*$cordovaFile.writeFile(cordova.file.dataDirectory, "record.tmp", "text", true)
-          .then(function (success) {alert('true');}, function (error) {alert('error');});*/
-
-        /*$cordovaFile.writeExistingFile(cordova.file.dataDirectory, "record.tmp", $scope.result)
-          .then(function (success) {
-            // success
-          }, function (error) {
-            // error
-          });*/
 
         var watch = $cordovaDeviceMotion.watchAcceleration(options);
         watch.then(
@@ -126,8 +107,7 @@ angular.module('app.controllers', ['ionic'])
 
 })
 
-.controller('graphicsCtrl', ['$scope', '$stateParams',
-function ($scope, $cordovaDeviceMotion, $cordovaFile) {
+.controller('graphicsCtrl', function ($scope, $cordovaDeviceMotion, $cordovaFile) {
 
   $scope.Read = function() {
    document.addEventListener("deviceready", function () {
@@ -176,4 +156,4 @@ function ($scope, $cordovaDeviceMotion, $cordovaFile) {
 
       chart.draw(data, options);
     }
-}]);
+});
