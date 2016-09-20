@@ -109,11 +109,14 @@ angular.module('app.controllers', ['ionic'])
 
 .controller('graphicsCtrl', function ($scope, $cordovaDeviceMotion, $cordovaFile) {
 
+  var records;
+
   $scope.Read = function() {
    document.addEventListener("deviceready", function () {
       $cordovaFile.readAsBinaryString(cordova.file.dataDirectory, "record.txt")
         .then(function (success) {
-          $scope.data = {records: success};
+          records = success.split('/');
+          alert(records[2]);
         }, function (error) {
           alert("Impossible de récupérer les données");
         });
