@@ -5,8 +5,10 @@ angular.module('app.controllers', ['ionic'])
 
     var tmp = '';
     var check = '';
+    var $names;
 
     $scope.Record = function() {
+      var file_name = "record_" + new Date().getTime();
         if ($scope.record.state == false) {
             $scope.record = {status: 'Stop', state: true};
             $('#page3').addClass("inRecord");
@@ -18,15 +20,23 @@ angular.module('app.controllers', ['ionic'])
             $('#page3').removeClass("inRecord");
             $('#freeze').fadeIn();
             document.addEventListener("deviceready", function () {
-              $cordovaFile.checkFile(cordova.file.dataDirectory, "record.txt")
+              $cordovaFile.checkFile(cordova.file.dataDirectory, "records.txt")
               .then(function (success) {
-                $cordovaFile.writeExistingFile(cordova.file.dataDirectory, "record.txt",  ",[" + tmp + " {\"name\": " + new Date().getTime()  + " }]");
+                  $cordovaFile.readAsBinaryString(cordova.file.dataDirectory, "records.txt")
+                  .then(function (success) {
+                    $names = success;
+                    alert($names);
+                  }, function (error) {
+                    alert("Impossible de récupérer les données");
+                  });
+                });
+                $cordovaFile.writeExistingFile(cordova.file.dataDirectory, "records.txt",  $names + "," + file_name);
+                $cordovaFile.writeFile(cordova.file.dataDirectory, file_name,  "record_" + new Date().getTime() + ",");
               }, function (error) {
-                 $cordovaFile.writeFile(cordova.file.dataDirectory, "record.txt", "[" + tmp + " {\"name\": " + new Date().getTime()  + " }]");
+                 $cordovaFile.writeFile(cordova.file.dataDirectory, "records.txt", file_name);
               });
-            });
+            };
         }
-    };
 
     $scope.Freeze = function() {
         if ($scope.freeze.state == true) {
@@ -104,9 +114,7 @@ angular.module('app.controllers', ['ionic'])
     watch.clearWatch;
 
     });
-
 })
-
 .controller('graphicsCtrl', function ($scope, $cordovaDeviceMotion, $cordovaFile) {
 
   var records;
