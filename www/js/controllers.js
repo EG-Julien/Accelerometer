@@ -72,7 +72,7 @@ angular.module('app.controllers', ['ionic'])
     document.addEventListener("deviceready", function () {
         $cordovaDeviceMotion.getCurrentAcceleration().then(function(result) {
             if ($scope.units.units == 'g') {
-                $scope.results = {x: (result.x/9.81).toFixed(4), y: (result.y/9.81).toFixed(4), z: (result.z/9.81).toFixed(4), time: result.timestamp};
+                $scope.results = {x: (result.x / 9.81).toFixed(4), y: (result.y / 9.81).toFixed(4), z: (result.z / 9.81).toFixed(4), time: result.timestamp};
             } else {
                 $scope.results = {x: result.x.toFixed(4), y: result.y.toFixed(4), z: result.z.toFixed(4), time: result.timestamp};
             }

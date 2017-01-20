@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="science.elektradev.accelerometer" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="cc.elektra.accelerometer" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Accelerometer</name>
   <description>
         Accelerometer sensor.
     </description>
-  <author email="julien.geneste@free.fr" href="https://elektradev.science/">
+  <author email="julien.geneste@free.fr" href="https://www.elektra.cc">
       EG Julien
     </author>
   <content src="index.html"/>
