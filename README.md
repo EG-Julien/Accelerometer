@@ -4,12 +4,18 @@ A simple accelerometer application
 Use Ionic Framework / Cordova
 
 #Todo
+  - Live broadcast *(0% implemented yet)*
+  - Record *(80% implemented)*
+  - Live Graphics *(0% implemented yet)*
+  - Record Graphics *(0% implemented yet | Only some tests)*
 
-  - Live broadcast
-  - Record
-  - Live Graphics
-  - Record Graphics
+#Tofix
+  - Change result when changing unit when freeze
+
+#Want to dev ?
+
+[Download](https://github.com/EG-Julien/Accelerometer/archive/master.zip) or clone this repo and type `npm install` in a terminal !
 
 #Documentation
 
-  *Not have time to write it yet*
+  *Dont have time to write it yet*
